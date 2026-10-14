@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10251e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Meu Fitness">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Meu Controle Fitness 2.0</title>
+<style>
+:root{--bg:#0b1713;--panel:#12251d;--panel2:#193328;--line:#2b483b;--text:#f1f7f2;--muted:#a5b9ac;--green:#8be0a5;--green2:#43b86c;--red:#ff8d8d;--gold:#f3d58a;--radius:20px}
+*{box-sizing:border-box}html{background:var(--bg);color-scheme:dark}body{margin:0;background:radial-gradient(ellipse at top,#18372a 0%,var(--bg) 48%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:760px;margin:auto;padding:18px 16px 40px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:8px 0 20px}.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.brand{font-size:25px;font-weight:850;letter-spacing:-.7px;margin:5px 0}.sub{color:var(--muted);font-size:13px}.iconbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:14px;padding:11px 13px;font-size:18px}
+.hero{border:1px solid #315442;background:linear-gradient(135deg,#1d4833,#13291f 75%);border-radius:24px;padding:19px;margin-bottom:16px;box-shadow:0 14px 40px #0003}.hero-row{display:flex;justify-content:space-between;align-items:center;gap:12px}.hero h2{margin:0 0 5px;font-size:18px}.hero p{margin:0;color:#c3d8ca;font-size:13px;line-height:1.4}.ring{width:66px;height:66px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) var(--progress,0%),#345445 0);position:relative}.ring:before{content:"";position:absolute;inset:6px;background:#18382a;border-radius:50%}.ring span{z-index:1;font-weight:800;font-size:14px}.progress-track{height:7px;border-radius:20px;background:#355443;margin-top:17px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--green);border-radius:20px;transition:width .2s}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:18px}.stat{background:#10231b;border:1px solid var(--line);border-radius:17px;padding:14px}.stat .label{color:var(--muted);font-size:12px}.stat .num{font-size:25px;font-weight:850;letter-spacing:-.6px;margin:5px 0 2px}.stat .hint{font-size:11px;color:var(--muted)}
+.section{background:#102019d9;border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:15px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.section h2{font-size:16px;margin:0}.monthnav{display:flex;align-items:center;gap:9px}.monthnav button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;width:32px;height:32px;font-size:18px}.monthnav strong{text-transform:capitalize;font-size:13px;min-width:125px;text-align:center}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.weekday{text-align:center;color:var(--muted);font-size:10px;padding:5px 0}.day{position:relative;aspect-ratio:1;border:1px solid transparent;background:#172b22;color:var(--text);border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;font-size:13px;min-width:0}.day.empty{background:transparent;pointer-events:none}.day.today{border-color:var(--green)}.day.done{background:#24583a;color:#e7ffec;border-color:#3c8b59;font-weight:800}.day.done:after{content:"✓";font-size:9px;color:var(--green);line-height:1}.day.selected{outline:2px solid var(--gold);outline-offset:1px}.day.future{opacity:.38}.calendar-legend{display:flex;gap:14px;color:var(--muted);font-size:11px;margin-top:12px;flex-wrap:wrap}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:5px}.dot.todaydot{background:transparent;border:1px solid var(--green)}
+label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid #355344;background:#0c1b14;color:var(--text);border-radius:12px;padding:12px;outline:none}textarea{min-height:74px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--green)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:13px;padding:13px 15px;font-weight:800}.primary{background:var(--green);color:#10251a}.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}.danger{color:var(--red);background:#351d1d;border:1px solid #633232}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.actions .btn{flex:1}.small{font-size:12px;padding:9px 11px}.history-list{display:grid;gap:9px}.history-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:14px;background:#172a21;border:1px solid #294435}.history-date{min-width:50px;text-align:center;background:#254635;border-radius:11px;padding:8px 5px}.history-date b{font-size:18px;display:block}.history-date span{font-size:10px;color:#c0d4c6;text-transform:uppercase}.history-info{flex:1;min-width:0}.history-info strong{display:block;font-size:13px;margin:1px 0 4px}.history-info p{margin:0;color:var(--muted);font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}.history-item .del{background:none;border:0;color:var(--muted);padding:4px;font-size:17px}.emptymsg{text-align:center;padding:20px 8px;color:var(--muted);font-size:13px;line-height:1.5}.foot{text-align:center;color:#779283;font-size:11px;margin:20px 0 8px;line-height:1.5}.toast{position:fixed;left:16px;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));max-width:500px;margin:auto;background:#e6ffec;color:#10251a;padding:13px 16px;border-radius:14px;font-weight:700;font-size:13px;box-shadow:0 10px 35px #0006;z-index:10;display:none}.hidden{display:none!important}.section-note{font-size:12px;color:var(--muted);line-height:1.45;margin:10px 0 0}.divider{border:0;border-top:1px solid var(--line);margin:15px 0}
+@media(min-width:620px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat .num{font-size:23px}.app{padding-top:28px}.day{aspect-ratio:1.1}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="eyebrow">Seu progresso, no seu ritmo</div><div class="brand">Meu Controle <span style="color:var(--green)">Fitness</span></div><div class="sub">Versão 2.0 · seus dados ficam neste aparelho</div></div><button class="iconbtn" id="backupTop" aria-label="Backup" title="Backup">↗</button></header>
+
+<section class="hero">
+  <div class="hero-row"><div><h2 id="goalTitle">Sua meta da semana</h2><p id="goalSub">Um treino de cada vez. Consistência é o segredo.</p></div><div class="ring" id="goalRing"><span id="goalRingText">0/3</span></div></div>
+  <div class="progress-track"><div class="progress-fill" id="goalProgress"></div></div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="label">Treinos no total</div><div class="num" id="statTotal">0</div><div class="hint">Desde o primeiro registro</div></div>
+  <div class="stat"><div class="label">Sequência atual</div><div class="num" id="statStreak">0 🔥</div><div class="hint">Dias consecutivos treinando</div></div>
+  <div class="stat"><div class="label">Neste mês</div><div class="num" id="statMonth">0</div><div class="hint">Dias com treino registrado</div></div>
+  <div class="stat"><div class="label">Últimos 7 dias</div><div class="num" id="statSeven">0</div><div class="hint">Dias com treino registrado</div></div>
+</div>
+
+<section class="section">
+ <div class="section-head"><h2>📅 Calendário</h2><div class="monthnav"><button id="prevMonth" aria-label="Mês anterior">‹</button><strong id="monthLabel"></strong><button id="nextMonth" aria-label="Próximo mês">›</button></div></div>
+ <div class="calendar" id="calendar"></div>
+ <div class="calendar-legend"><span><i class="dot"></i>Treino concluído</span><span><i class="dot todaydot"></i>Hoje</span><span>Toque em um dia para registrar</span></div>
+</section>
+
+<section class="section" id="workoutSection">
+ <div class="section-head"><h2 id="formTitle">✍️ Registrar treino</h2><span class="sub" id="selectedLabel"></span></div>
+ <label for="workoutDate">Data do treino</label><input type="date" id="workoutDate">
+ <div class="formgrid">
+  <div><label for="activity">Atividade</label><select id="activity"><option>Musculação</option><option>Bicicleta ergométrica</option><option>Corrida / caminhada</option><option>Pilates / mobilidade</option><option>Natação</option><option>Esporte</option><option>Outro</option></select></div>
+  <div><label for="duration">Duração (minutos)</label><input type="number" id="duration" min="1" max="1440" placeholder="Ex.: 30"></div>
+ </div>
+ <label for="notes">Observações (opcional)</label><textarea id="notes" maxlength="500" placeholder="Ex.: treino leve, como me senti, distância..."></textarea>
+ <div class="actions"><button class="btn primary" id="saveWorkout">✓ Salvar treino</button><button class="btn secondary" id="clearForm">Limpar</button></div>
+ <p class="section-note">Você pode registrar mais de uma atividade no mesmo dia. Para a meta e o calendário, esse dia conta como um dia treinado.</p>
+</section>
+
+<section class="section">
+ <div class="section-head"><h2>🎯 Meta semanal</h2></div>
+ <label for="weeklyGoal">Quantos dias por semana quer treinar?</label>
+ <div class="formgrid"><select id="weeklyGoal"><option value="1">1 dia</option><option value="2">2 dias</option><option value="3" selected>3 dias</option><option value="4">4 dias</option><option value="5">5 dias</option><option value="6">6 dias</option><option value="7">7 dias</option></select><button class="btn secondary" id="saveGoal">Salvar meta</button></div>
+ <p class="section-note">A semana é contada de segunda a domingo. Ajuste a meta para combinar com sua rotina.</p>
+</section>
+
+<section class="section">
+ <div class="section-head"><h2>🧾 Histórico</h2><span class="sub" id="historyCount">0 registros</span></div>
+ <div id="history" class="history-list"></div>
+</section>
+
+<section class="section">
+ <div class="section-head"><h2>🔐 Seus dados e backup</h2></div>
+ <p class="section-note">Os registros são salvos no armazenamento local deste navegador/aplicativo. Não existe conta nem sincronização. Exporte um backup de tempos em tempos, especialmente antes de trocar de iPhone ou limpar dados do Safari.</p>
+ <div class="actions"><button class="btn secondary" id="exportBtn">Exportar backup</button><button class="btn secondary" id="importBtn">Importar backup</button><button class="btn danger" id="resetBtn">Apagar todos os dados</button><input type="file" id="importFile" accept="application/json,.json" class="hidden"></div>
+</section>
+<div class="foot">MEU CONTROLE FITNESS 2.0<br>Feito para apoiar sua consistência — sem cobrança, um dia de cada vez.</div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const KEY='meuControleFitnessV2';
+const $=id=>document.getElementById(id);
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const parseISO=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)};
+const toISO=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const fmtMonth=d=>new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric'}).format(d);
+const fmtLong=s=>new Intl.DateTimeFormat('pt-BR',{weekday:'short',day:'2-digit',month:'short'}).format(parseISO(s)).replace('.','');
+const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let data={workouts:[],goal:3};
+let viewDate=new Date();viewDate.setDate(1);
+let selectedDate=todayISO();
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){const parsed=JSON.parse(raw);if(Array.isArray(parsed.workouts))data.workouts=parsed.workouts;if(Number.isInteger(parsed.goal)&&parsed.goal>=1&&parsed.goal<=7)data.goal=parsed.goal;}}catch(e){console.warn('Não foi possível ler os dados locais.',e)}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch(e){showToast('Não foi possível salvar. Exporte o backup e verifique o espaço disponível.');return false}}
+function showToast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.style.display='none',2600)}
+function uniqueDays(list=data.workouts){return new Set(list.map(w=>w.date))}
+function dayCountInRange(start,end){return [...uniqueDays()].filter(s=>s>=start&&s<=end).length}
+function weekStart(date){const d=new Date(date);d.setHours(12,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7);return d}
+function renderCalendar(){
+ const year=viewDate.getFullYear(),month=viewDate.getMonth(),first=new Date(year,month,1,12),last=new Date(year,month+1,0,12);
+ $('monthLabel').textContent=fmtMonth(viewDate);
+ const offset=(first.getDay()+6)%7;let html=['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].map(x=>`<div class="weekday">${x}</div>`).join('');
+ for(let i=0;i<offset;i++)html+='<div class="day empty"></div>';
+ const days=uniqueDays(),today=todayISO();
+ for(let n=1;n<=last.getDate();n++){const date=`${year}-${String(month+1).padStart(2,'0')}-${String(n).padStart(2,'0')}`;let cls='day';if(date===today)cls+=' today';if(days.has(date))cls+=' done';if(date===selectedDate)cls+=' selected';if(date>today)cls+=' future';html+=`<button class="${cls}" data-date="${date}" aria-label="${date}${days.has(date)?', treino registrado':''}">${n}${days.has(date)?'<span style="font-size:9px">✓</span>':''}</button>`}
+ $('calendar').innerHTML=html;
+ $('calendar').querySelectorAll('button[data-date]').forEach(b=>b.addEventListener('click',()=>{selectedDate=b.dataset.date;$('workoutDate').value=selectedDate;$('selectedLabel').textContent=fmtLong(selectedDate);renderCalendar();}));
+}
+function currentStreak(){
+ const days=uniqueDays();let cursor=parseISO(todayISO());
+ if(!days.has(toISO(cursor)))cursor.setDate(cursor.getDate()-1);
+ let count=0;while(days.has(toISO(cursor))){count++;cursor.setDate(cursor.getDate()-1);if(count>5000)break}return count;
+}
+function renderStats(){
+ const days=uniqueDays(),today=parseISO(todayISO()),start=weekStart(today),end=new Date(start);end.setDate(end.getDate()+6);
+ const weekN=dayCountInRange(toISO(start),toISO(end));
+ const monthPrefix=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-`;
+ const monthN=[...days].filter(d=>d.startsWith(monthPrefix)).length;
+ const sevenStart=new Date(today);sevenStart.setDate(sevenStart.getDate()-6);
+ const sevenN=dayCountInRange(toISO(sevenStart),todayISO());
+ $('statTotal').textContent=days.size;$('statStreak').textContent=currentStreak()+' 🔥';$('statMonth').textContent=monthN;$('statSeven').textContent=sevenN;
+ const pct=Math.min(100,Math.round(weekN/data.goal*100));
+ $('goalRing').style.setProperty('--progress',pct+'%');$('goalRingText').textContent=`${weekN}/${data.goal}`;$('goalProgress').style.width=pct+'%';
+ $('goalTitle').textContent=weekN>=data.goal?'Meta semanal concluída!':'Sua meta da semana';
+ $('goalSub').textContent=weekN>=data.goal?'Boa! Você cumpriu sua meta. Se quiser, mantenha o ritmo.':`Faltam ${Math.max(0,data.goal-weekN)} ${data.goal-weekN===1?'dia':'dias'} de treino para sua meta.`;
+ $('weeklyGoal').value=String(data.goal);
+}
+function renderHistory(){
+ const sorted=[...data.workouts].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+ $('historyCount').textContent=`${sorted.length} ${sorted.length===1?'registro':'registros'}`;
+ if(!sorted.length){$('history').innerHTML='<div class="emptymsg">Ainda não há treinos registrados.<br>Seu primeiro passo pode ser hoje. 💚</div>';return}
+ $('history').innerHTML=sorted.map(w=>`<article class="history-item"><div class="history-date"><b>${parseISO(w.date).getDate()}</b><span>${new Intl.DateTimeFormat('pt-BR',{month:'short'}).format(parseISO(w.date)).replace('.','')}</span></div><div class="history-info"><strong>${escapeHTML(w.activity)}${w.duration?` · ${escapeHTML(w.duration)} min`:''}</strong><p>${escapeHTML(w.notes||'Sem observações')}</p><p style="margin-top:5px;color:#8be0a5">${escapeHTML(fmtLong(w.date))}</p></div><button class="del" data-delete="${w.id}" aria-label="Excluir registro" title="Excluir">×</button></article>`).join('');
+ $('history').querySelectorAll('[data-delete]').forEach(b=>b.addEventListener('click',()=>{if(confirm('Excluir este registro de treino?')){data.workouts=data.workouts.filter(w=>String(w.id)!==b.dataset.delete);persist();renderAll();showToast('Registro excluído.')}}));
+}
+function renderAll(){renderCalendar();renderStats();renderHistory()}
+function clearForm(){ $('activity').value='Musculação';$('duration').value='';$('notes').value='';$('workoutDate').value=selectedDate;$('selectedLabel').textContent=fmtLong(selectedDate);$('formTitle').textContent='✍️ Registrar treino';$('saveWorkout').textContent='✓ Salvar treino';}
+$('saveWorkout').addEventListener('click',()=>{
+ const date=$('workoutDate').value;if(!date){showToast('Escolha a data do treino.');return}
+ const duration=$('duration').value.trim();if(duration&&(!Number.isFinite(Number(duration))||Number(duration)<1||Number(duration)>1440)){showToast('Informe uma duração entre 1 e 1440 minutos.');return}
+ data.workouts.push({id:Date.now()+Math.floor(Math.random()*1000),date,activity:$('activity').value,duration:duration?Number(duration):'',notes:$('notes').value.trim()});
+ selectedDate=date;viewDate=new Date(parseISO(date));viewDate.setDate(1);persist();clearForm();renderAll();showToast('Treino registrado! Mandou bem. 💪');
+});
+$('clearForm').addEventListener('click',clearForm);
+$('workoutDate').addEventListener('change',()=>{if($('workoutDate').value){selectedDate=$('workoutDate').value;viewDate=new Date(parseISO(selectedDate));viewDate.setDate(1);$('selectedLabel').textContent=fmtLong(selectedDate);renderCalendar()}});
+$('prevMonth').addEventListener('click',()=>{viewDate.setMonth(viewDate.getMonth()-1);renderCalendar()});
+$('nextMonth').addEventListener('click',()=>{viewDate.setMonth(viewDate.getMonth()+1);renderCalendar()});
+$('saveGoal').addEventListener('click',()=>{data.goal=Number($('weeklyGoal').value);persist();renderStats();showToast('Meta semanal atualizada!')});
+function exportBackup(){const blob=new Blob([JSON.stringify({app:'Meu Controle Fitness 2.0',exportedAt:new Date().toISOString(),...data},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`meu-controle-fitness-backup-${todayISO()}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);showToast('Backup exportado. Guarde o arquivo em local seguro.')}
+$('exportBtn').addEventListener('click',exportBackup);$('backupTop').addEventListener('click',exportBackup);
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const parsed=JSON.parse(await f.text());if(!Array.isArray(parsed.workouts)||!parsed.workouts.every(w=>w.date&&w.activity)){throw new Error('Formato inválido')}if(!confirm('Importar este backup substituirá os dados atuais. Deseja continuar?'))return;data={workouts:parsed.workouts,goal:Number.isInteger(parsed.goal)&&parsed.goal>=1&&parsed.goal<=7?parsed.goal:3};persist();renderAll();showToast('Backup importado!')}catch(err){showToast('Arquivo inválido. Escolha um backup exportado pelo app.')}finally{e.target.value=''}});
+$('resetBtn').addEventListener('click',()=>{if(confirm('Tem certeza que deseja apagar TODOS os treinos e a meta salva neste aparelho? Esta ação não pode ser desfeita.')){data={workouts:[],goal:3};persist();selectedDate=todayISO();viewDate=new Date();viewDate.setDate(1);clearForm();renderAll();showToast('Dados apagados.')}});
+load();$('workoutDate').value=selectedDate;$('selectedLabel').textContent=fmtLong(selectedDate);renderAll();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
